@@ -22,7 +22,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceTest {
 
-    /*
     @Mock
     private CustomerRepository customerRepository;
 
@@ -76,7 +75,4 @@ class CustomerServiceTest {
     }
 
     // Add tests for deleteCustomer, updateCustomer, and getCustomerById
-
- b
-     */
 }

@@ -9,8 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SONAR_URL: "http://192.168.1.11:9000"
+    #env:
+      #SONAR_URL: "http://192.168.1.11:9000"
 
     steps:
     - name: Checkout code

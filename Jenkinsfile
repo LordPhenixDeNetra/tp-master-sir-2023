@@ -59,7 +59,7 @@ pipeline {
     failure {
       emailext(
         subject: "Build Failed: ${currentBuild.fullDisplayName}",
-        body: "The build has failed. Please investigate and take necessary action. \n \n Build URL: $BUILD_URL",
+        body: "The build has failed. Please investigate and take necessary action.\n \n Build URL: $BUILD_URL",
         recipientProviders: [culprits(), developers()],
         replyTo: "netrathior@gmail.com",
         to: "netrathior@gmail.com"

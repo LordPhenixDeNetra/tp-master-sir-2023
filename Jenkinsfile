@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven '3.9.3'
     }
+    environment{
+        SONAR_URL : "http://localhost:9000/"
+    }
     stages {
         stage("Source") {
             steps {

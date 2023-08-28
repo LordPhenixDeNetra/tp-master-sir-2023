@@ -1,0 +1,75 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    #env:
+      #SONAR_URL: "http://192.168.1.11:9000"
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Source
+      run: git checkout ${{ github.event.inputs.BRANCH }}
+      working-directory: ${{ github.workspace }}
+
+    - name: Maven version
+      run: mvn --version
+      working-directory: ${{ github.workspace }}
+
+    - name: Build
+      run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+      working-directory: ${{ github.workspace }}
+
+    # - name: SonarQube Analysis
+    #   run: mvn sonar:sonar -Dsonar.host.url=$SONAR_URL
+    #   working-directory: ${{ github.workspace }}
+
+    # - name: Approve Deployment
+    #   id: approval
+    #   run: |
+    #     echo "Do you want to proceed for deployment?"
+    #     echo "Approve by typing 'deploy'"
+    #     read approval_input
+    #     if [ "$approval_input" != "deploy" ]; then
+    #       echo "Deployment not approved."
+    #       exit 1
+    #     fi
+
+    - name: Deploy to Server
+      if: steps.approval.outcome == 'success'
+      run: echo "Deploying into Server"
+
+  notifications:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Send Notification on Failure
+      if: failure()
+      run: echo "Sending message to agent"
+
+    - name: Send Notification on Success
+      if: success()
+      run: |
+        echo "Sending email notification..."
+        # Add your email notification logic here
+
+    - name: Send Notification on Aborted
+      if: cancelled()
+      run: echo "Sending message to agent"
+
+

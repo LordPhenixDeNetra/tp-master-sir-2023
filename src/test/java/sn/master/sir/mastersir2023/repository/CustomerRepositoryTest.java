@@ -19,7 +19,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CustomerRepositoryTest {
 
-    /*
     @Mock
     private CustomerRepository customerRepository;
 
@@ -64,5 +63,4 @@ class CustomerRepositoryTest {
         verify(customerRepository, times(1)).save(newCustomer);
     }
 
-     */
 }

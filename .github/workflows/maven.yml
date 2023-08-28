@@ -39,16 +39,16 @@ jobs:
     #   run: mvn sonar:sonar -Dsonar.host.url=$SONAR_URL
     #   working-directory: ${{ github.workspace }}
 
-    - name: Approve Deployment
-      id: approval
-      run: |
-        echo "Do you want to proceed for deployment?"
-        echo "Approve by typing 'deploy'"
-        read approval_input
-        if [ "$approval_input" != "deploy" ]; then
-          echo "Deployment not approved."
-          exit 1
-        fi
+    # - name: Approve Deployment
+    #   id: approval
+    #   run: |
+    #     echo "Do you want to proceed for deployment?"
+    #     echo "Approve by typing 'deploy'"
+    #     read approval_input
+    #     if [ "$approval_input" != "deploy" ]; then
+    #       echo "Deployment not approved."
+    #       exit 1
+    #     fi
 
     - name: Deploy to Server
       if: steps.approval.outcome == 'success'

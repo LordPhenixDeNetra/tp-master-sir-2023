@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline TP MASTER SIR 2023
 
 on:
   push:
